@@ -21,7 +21,8 @@ CAPTCHA_WIDTH = 160        # 验证码宽度
 
 # 10 个 Epochs 训练的模型
 MODEL_FILE = './pre-trained/model/captcha_rmsprop_binary_crossentropy_bs_100_epochs_10.h5'
-
+# 自己训练的
+# MODEL_FILE = './model/train_demo/captcha_adam_binary_crossentropy_bs_100_epochs_10.h5'
 def vec2text(vector):
     if not isinstance(vector, np.ndarray):
         vector = np.asarray(vector)
@@ -61,14 +62,18 @@ def predict():
         if received_image:
             image = np.array(Image.open(BytesIO(image)))
             image = rgb2gray(image).reshape(1, 60, 160, 1).astype('float32') / 255
+            # 用了高层次API的小问题
             with graph.as_default():
                 pred = model.predict(image)
             response['prediction'] = response['prediction'] + vec2text(pred)
             response['success'] = True
-            response['debug'] = 'predicted'
+            response['debug'] = 'predicted11'
     else:
         response['debug'] = 'No Post'
     return jsonify(response)
 
 model = load_model(MODEL_FILE) # 加载模型
 graph = tf.get_default_graph() # 获取 TensorFlow 默认数据流图
+
+
+print("----------------------")
