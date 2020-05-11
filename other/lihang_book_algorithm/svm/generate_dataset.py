@@ -49,7 +49,7 @@ def data_visualization(X,y,title):
 
     size = len(y)
 
-    for i in xrange(size):
+    for i in range(size):
         X_1 = X[0][i]
         X_2 = X[1][i]
 
@@ -76,7 +76,7 @@ def rebuild_features(features):
     size = len(features[0])
 
     new_features = []
-    for i in xrange(size):
+    for i in range(size):
         new_features.append([features[0][i],features[1][i]])
 
     return new_features
@@ -92,7 +92,7 @@ def generate_dataset(size, noisy = False, visualization = True):
 
     testset_size = int(len(y)*0.333)
 
-    indexes = [i for i in xrange(len(y))]
+    indexes = [i for i in range(len(y))]
     test_indexes = random.sample(indexes,testset_size)
     train_indexes = list(set(indexes)-set(test_indexes))
 
@@ -126,8 +126,38 @@ def generate_dataset(size, noisy = False, visualization = True):
 if __name__ == '__main__':
 
     size = 1000
-    generate_dataset(size)
 
+    train_features, train_labels, test_features, test_labels = generate_dataset(100, visualization=True)
+
+    X=np.array(train_features)
+    y=np.array(train_labels)
+    X_po=X[np.where(y==1)]
+    X_ne=X[np.where(y==-1)]
+    x_1=X_po[:,0]
+    y_1=X_po[:,1]
+    x_2=X_ne[:,0]
+    y_2=X_ne[:,1]
+    plt.plot(x_1,y_1,"ro")
+    plt.plot(x_2,y_2,"gx")
+    plt.show()
+
+    # y=np.array([y[i][0] for i in range(y.shape[0])])
+    # X_po=X[np.where(y==1)]
+    # X_ne=X[np.where(y==-1)]
+    # x_1=X_po[:,0]
+    # y_1=X_po[:,1]
+    # x_2=X_ne[:,0]
+    # y_2=X_ne[:,1]
+    # plt.plot(x_1,y_1,"ro")
+    # plt.plot(x_2,y_2,"gx")
+    # x=np.array([0,3])
+    # y=(-b-w[0]*x)/w[1]
+    # y_po=(1-b-w[0]*x)/w[1]
+    # y_ne=(-1-b-w[0]*x)/w[1]
+    # plt.plot(x,y,"r")
+    # plt.plot(x,y_po,"g")
+    # plt.plot(x,y_ne,"g")
+    # plt.show()
     # generate_dataset
     # print sign
     # sign = np.vectorize(sign)

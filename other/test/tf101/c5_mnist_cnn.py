@@ -1,6 +1,6 @@
 from keras.datasets import mnist
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data('mnist/mnist.npz')
+(x_train, y_train), (x_test, y_test) = mnist.load_data('./mnist/mnist.npz')
 
 print(x_train.shape, type(x_train))
 print(y_train.shape, type(y_train))

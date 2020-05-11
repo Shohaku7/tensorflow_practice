@@ -14,6 +14,10 @@ df = pd.concat([ones, df], axis=1)  # 根据列合并数据
 X_data = np.array(df[df.columns[0:3]])
 y_data = np.array(df[df.columns[-1]]).reshape(len(df), 1)
 
+
+
+
+
 print(X_data.shape, type(X_data))
 print(y_data.shape, type(y_data))
 
